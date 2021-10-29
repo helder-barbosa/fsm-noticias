@@ -15,8 +15,15 @@ app.use(express.static('public'))
 app.get('/', (req, res) => res.render('index'))
 
 mongoose
-  .connect(mongo, { useMongoClient: true })
+  .connect(mongo, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     app.listen(port, () => console.log('Listening...'))
   })
   .catch(e => console.log(e))
+
+const User = require('./models/user')
+const user = new User({
+  username: 'john-michael',
+  password: 'abc123'
+})
+user.save(() => console.log('ok'))
