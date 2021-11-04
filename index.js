@@ -23,24 +23,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(express.static('public'))
 
-app.use((req, res, next) => {
-  if ('user' in req.session) {
-    res.locals.user = req.session.user
-  }
-  next()
-})
+app.use('/', auth)
+app.use('/', pages)
 
-app.use('/restrito', (req, res, next) => {
-  if ('user' in req.session) {
-    return next()
-  }
-  res.redirect('/login')
-})
 app.use('/restrito', restrito)
 app.use('/noticias', noticias)
 
-app.use('/', auth)
-app.use('/', pages)
 
 const createInitialUser = async () => {
   const total = await User.countDocuments({ username: 'system_admin' })
@@ -54,6 +42,7 @@ const createInitialUser = async () => {
   } else {
     console.log('create User SKIPPED')
   }
+  /*
   const noticia = new Noticia({
     title: 'Noticia Publica' + new Date().getTime(),
     content: 'content',
@@ -67,7 +56,7 @@ const createInitialUser = async () => {
     category: 'private'
   })
   await noticia2.save()
-
+  */
 }
 
 
