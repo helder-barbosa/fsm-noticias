@@ -31,8 +31,8 @@ passport.use(new LocalStrategy(async (username, password, done) => {
 }))
 
 passport.use(new FacebookStrategy({
-  clientID: '',
-  clientSecret: '',
+  clientID: '865747544075507',
+  clientSecret: 'aade14e83cc46e9922595d7bf9fa7d63',
   callbackURL: 'http://localhost:3000/facebook/callback',
   profileFields: ['id', 'displayName', 'email', 'photos']
 }, async (accessToken, refreshToken, profile, done) => {
@@ -85,5 +85,13 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/login',
   failureFlash: false
 }))
+
+router.get('/facebook', passport.authenticate('facebook'))
+router.get('/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  (req, res) => {
+    res.redirect('/')
+  }
+)
 
 module.exports = router
