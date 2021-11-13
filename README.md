@@ -2,7 +2,7 @@
 
 ## Início
 
-Portal de noticias, com interfaces adequadas a permissão de usuário.
+Portal de noticias, com interfaces adequadas a permissão de usuário. Com autenticação por Facebook e Google.
 
 
 ### Pré-requisitos:
@@ -14,11 +14,26 @@ npm install
 npm start
 ```
 
+### Criar credenciais para utilização da Strategy.
 
+* Facebook Strategy ->  https://developers.facebook.com/apps/
+* Google Strategy ->  https://console.developers.google.com/
+
+Exemplo: 
+```
+passport.use(new GoogleStrategy({
+  clientID: 'XXXXX',
+  clientSecret: 'XXXX',
+  callbackURL: 'http://localhost:3000/google/callback',
+
+},
+
+```
 ## Construído com:
 
 * [ExpressJS](https://expressjs.com/pt-br/) - Express é um framework para aplicativo da web do Node.js.
-* [EJS](https://ejs.co/) - Embedded JavaScript templating..
+* [EJS](https://ejs.co/) - Embedded JavaScript templating.
+* [PassportJS](http://www.passportjs.org/) - Passport is authentication middleware for Node.js.
 
 ## Author:
 
